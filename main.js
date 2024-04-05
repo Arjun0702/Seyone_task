@@ -10,9 +10,26 @@ function cancelForm() {
   grecaptcha.reset();
 }
 
+const items = document.getElementsByClassName("inputdata");
+const errornumber = document.querySelector(".pnum");
+const errorFirstName = document.querySelector("#errorfirstname");
+const errorLastName = document.querySelector("#errorlastname")
+for (const inputdata of items) {
+  if(inputdata.getAttribute('name') === "phone"){
+    inputdata.addEventListener('input', function() {
+      const phoneValue = phoneNo.value.trim();
+      if (phoneValue.length > 10) {
+        phoneNo.value = phoneValue.slice(0, 10); // Limit to 10 digits
+      }
+    });
+  }
+}
 function checkInputs() {
-  const items = document.getElementsByClassName("inputdata");
-  console.log("first", items);
+ 
+
+
+  // console.log("first", items);
+
   for (const inputdata of items) {
     if (inputdata.value == "") {
       inputdata.classList.add("error");
@@ -24,13 +41,6 @@ function checkInputs() {
     }
     items[2].addEventListener("keyup", () => {
       checkmail();
-    });
-
-    if (items[3].value != "") {
-      checkPhoneNo();
-    }
-    items[3].addEventListener("keyup", () => {
-      checkPhoneNo();
     });
 
     inputdata.addEventListener("keyup", () => {
@@ -45,9 +55,12 @@ function checkInputs() {
   }
 }
 
+
+
+
+
 function checkmail() {
-  const emailcheck =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  const emailcheck =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const errormail = document.querySelector(".error-txt.email");
   if (!emailId.value.match(emailcheck)) {
     emailId.classList.add("error");
@@ -64,26 +77,56 @@ function checkmail() {
   }
 }
 
+
+
+
+
 function checkPhoneNo() {
-  const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  const phoneRegex = (/^\(?([6-9]{1})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{4})$/) ;
   const errornumber = document.querySelector(".pnum");
-  if (!phoneNo.value.match(phoneRegex)) {
+
+  if (!phoneNo.value.match(phoneRegex)){
     phoneNo.classList.add("error");
     phoneNo.parentElement.classList.add("error");
     if (phoneNo.value != "") {
       errornumber.innerText = "Enter a valid phone number";
     } else {
-      errornumber.innerText = "Email phonenumber can't be blank";
+      errornumber.innerText = "Phonenumber can't be blank";
     }
-  } else {
+  } 
+  else {
     phoneNo.classList.remove("error");
     phoneNo.parentElement.classList.remove("error");
   }
 }
 
+
+// function checkLetter(){
+//   const nameRegex = "/^[a-zA-Z\s-]*$"
+//   const errorFirstName = document.querySelector("#errorfirstname");
+
+//   if (!firstName.value.match(nameRegex)){
+//     firstName.classList.add("error");
+//     firstName.parentElement.classList.add("error");
+//     errorFirstName.innerText = "Enter a valid name";
+//     if (firstName.value != "") {
+//       errorFirstName.innerText = "Firstname can't be blank"
+//       // console.log("first",firstName.value)
+     
+//     } else {
+//       ;
+//     }
+//   } 
+//   else {
+//     firstName.classList.remove("error");
+//     firstName.parentElement.classList.remove("error");
+//   }
+// }
+
+
+
 function sendEmail() {
-  let noProduct =
-    productList.value.length > 1 ? productList.value : "No product selected";
+  let noProduct = productList.value.length > 1 ? productList.value : "No product selected";
 
   const bodyMessage = `
         First name : ${firstName.value} <br>
@@ -107,6 +150,7 @@ function sendEmail() {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   checkInputs();
+  checkPhoneNo();
 
   var response = grecaptcha.getResponse();
   if (response.length == 0) {

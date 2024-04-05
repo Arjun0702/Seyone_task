@@ -23,41 +23,40 @@
   <body>
     <div class="container">
       <form
-        action="yuvanarjun0702@gmail.com"
-        method="post"
-        enctype="text/plain"
+        action=""
+        method=""
         id="form"
       >
         <div class="row">
           <h1 style="text-align: center">Form</h1>
 
           <div class="col-lg-6 mt-3">
-            <label for="firstname" class="form-label">First Name</label>
-            <input type="text" class="form-control inputdata" id="firstname" />
-            <div class="error-txt">Plesae enter firstname</div>
+            <label for="firstname" class="form-label">First Name <span style="color: red;">*</span></label>
+            <input type="text" class="form-control inputdata" name="firstName" id="firstname" pattern="[A-Za-z]{3,150}"/>
+            <div class="error-txt" id="errorfirstname">Please enter firstname</div>
           </div>
 
           <div class="col-lg-6 mt-3">
-            <label for="lastname" class="form-label">Last Name</label>
-            <input type="text" class="form-control inputdata" id="lastname" />
-            <div class="error-txt">Plesae enter lastname</div>
+            <label for="lastname" class="form-label">Last Name <span style="color: red;">*</span></label>
+            <input type="text" class="form-control inputdata" name="lastName" id="lastname" pattern="[A-Za-z]{3,150}" />
+            <div class="error-txt" id="errorlastname">Please enter lastname</div>
           </div>
         </div>
 
         <div class="col-lg-12 mt-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control inputdata" id="email" />
-          <div class="error-txt email">Plesae enter the email</div>
+          <label for="email" class="form-label">Email <span style="color: red;">*</span></label>
+          <input type="email" class="form-control inputdata" name="email"id="email" />
+          <div class="error-txt email">Please enter the email</div>
         </div>
 
         <div class="col-lg-12 mt-3">
-          <label for="phone" class="form-label">Phone Number</label>
-          <input type="number" class="form-control inputdata" id="phone" />
+          <label for="phone" class="form-label">Phone Number <span style="color: red;">*</span></label>
+          <input type="number" class="form-control inputdata" name="phone" id="phone" pattern="[0-9]"/>
           <div class="error-txt pnum">Please enter the valid number</div>
         </div>
 
         <div class="col-lg-12 mt-3">
-          <label for="product" class="form-label">Product(optional)</label>
+          <label for="product" class="form-label">Product (optional)</label>
           <select name="product" id="product" class="form-select inputdata">
             <option value=" ">Select</option>
             <option>Product 1</option>
